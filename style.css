@@ -1,0 +1,16 @@
+ul {
+  opacity: 0;
+  list-style: none;
+}
+
+ul.active {
+  animation: myFrames;
+  animation-duration: 250ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes myFrames {
+  100% {
+    opacity: 1;
+  }
+}
