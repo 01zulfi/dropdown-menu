@@ -16,7 +16,6 @@ function createStyleTag() {
       align-items: center;
       gap: 10px;
       pointer-events: none;
-      padding: 10px;
       background-color: white;
     }
     
@@ -35,7 +34,7 @@ function createStyleTag() {
       text-align: center;
     }
     
-    li.dropdown-menu-list-hover:hover {
+    li.dropdown-menu-list-item:hover {
       background-color: rgba(0, 0, 0, 0.1);
     }
     
@@ -48,6 +47,15 @@ function createStyleTag() {
       100% {
         opacity: 1;
         transform: translateY(10px);
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      ul.dropdown-menu-list {
+        width: 80%;
+      }
+      li.dropdown-menu-list-item {
+        background-color: rgba(0,0,0,0.1);
       }
     }
   `;
@@ -77,10 +85,10 @@ function createList(menu, menuStyles, listStyles) {
       className: "dropdown-menu-list-item",
     });
     listParent.append(listItem);
+    listItem.addEventListener("click", () => {
+      listParent.classList.toggle("active");
+    });
   }
-  listParent.addEventListener("click", () =>
-    listParent.classList.toggle("active")
-  );
   return listParent;
 }
 
@@ -103,22 +111,3 @@ function renderDropdownMenu(
     dropdownList.classList.toggle("active")
   );
 }
-
-renderDropdownMenu(
-  "dropdown",
-  {
-    textContent: "This is the dropdown",
-  },
-  [
-    { textContent: "hkldjflakdjflajfdkljl", href: "#" },
-    { textContent: "one", href: "#" },
-    { textContent: "one", href: "#" },
-    { textContent: "one", href: "#" },
-    { textContent: "one", href: "#" },
-    { textContent: "one", href: "#" },
-  ]
-);
-
-renderDropdownMenu("dropdown2", { textContent: "hah" }, [
-  { textContent: "why" },
-]);
