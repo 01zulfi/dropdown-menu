@@ -1,17 +1,6 @@
 function createStyleTag() {
   const CSSRules = `
-    body {
-      padding: 30px;
-    }
-    
-    div {
-      border: 1px solid black;
-      position: relative;
-      margin: 100px;
-      padding-left: 100px;
-    }
-    
-    ul {
+    ul.dropdown-menu-list {
       position: absolute;
       top: 0;
       z-index: 1;
@@ -28,37 +17,34 @@ function createStyleTag() {
       gap: 10px;
       pointer-events: none;
       padding: 10px;
-      background-color: aliceblue;
+      background-color: white;
     }
     
-    ul.active {
+    ul.dropdown-menu-list.active {
       transition: transform 150ms;
       pointer-events: auto;
-      animation: myFrames;
+      animation: dropdown-animation;
       animation-duration: 250ms;
       animation-fill-mode: forwards;
     }
     
-    li {
+    li.dropdown-menu-list-item {
       padding: 5px;
       border-radius: 5px;
       width: 100%;
       text-align: center;
     }
     
-    li:hover {
+    li.dropdown-menu-list-hover:hover {
       background-color: rgba(0, 0, 0, 0.1);
     }
     
-    ul.active li {
+    ul.dropdown-menu-list.active li.dropdown-menu-list-item {
       cursor: pointer;
       pointer-events: auto;
     }
     
-    @keyframes myFrames {
-      50% {
-        opacity: 0.5;
-      }
+    @keyframes dropdown-animation {
       100% {
         opacity: 1;
         transform: translateY(10px);
@@ -67,6 +53,8 @@ function createStyleTag() {
   `;
   return DOMFactory("style", { textContent: CSSRules });
 }
+
+document.head.append(createStyleTag());
 
 function DOMFactory(element, attributes) {
   const newElement = document.createElement(element);
@@ -77,10 +65,17 @@ function DOMFactory(element, attributes) {
 }
 
 function createList(menu, menuStyles, listStyles) {
-  const listParent = DOMFactory("ul", { style: menuStyles.join(";") });
+  const listParent = DOMFactory("ul", {
+    style: menuStyles.join(";"),
+    className: "dropdown-menu-list",
+  });
   if (!menu) return listParent;
   for (const item of menu) {
-    const listItem = DOMFactory("li", { ...item, style: listStyles.join(";") });
+    const listItem = DOMFactory("li", {
+      ...item,
+      style: listStyles.join(";"),
+      className: "dropdown-menu-list-item",
+    });
     listParent.append(listItem);
   }
   listParent.addEventListener("click", () =>
@@ -97,7 +92,11 @@ function renderDropdownMenu(
   listStyles = []
 ) {
   const targetElement = document.getElementById(targetId);
-  const dropdownButton = DOMFactory("button", button);
+  targetElement.style.position = "relative";
+  const dropdownButton = DOMFactory("button", {
+    ...button,
+    className: "dropdown-button",
+  });
   const dropdownList = createList(menu, menuStyles, listStyles);
   targetElement.append(dropdownButton, dropdownList);
   dropdownButton.addEventListener("click", () =>
@@ -105,13 +104,10 @@ function renderDropdownMenu(
   );
 }
 
-document.head.append(createStyleTag());
-
 renderDropdownMenu(
   "dropdown",
   {
     textContent: "This is the dropdown",
-    className: "wow",
   },
   [
     { textContent: "hkldjflakdjflajfdkljl", href: "#" },
@@ -120,9 +116,7 @@ renderDropdownMenu(
     { textContent: "one", href: "#" },
     { textContent: "one", href: "#" },
     { textContent: "one", href: "#" },
-  ],
-  ["background-color: lightblue", "color: darkblue"],
-  ["background-color: rgba(255,255,255,0.5)"]
+  ]
 );
 
 renderDropdownMenu("dropdown2", { textContent: "hah" }, [
