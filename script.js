@@ -92,7 +92,7 @@ function createList(menu, menuStyles, listStyles) {
   return listParent;
 }
 
-function renderDropdownMenu(
+export default function renderDropdownMenu(
   targetId,
   button,
   menu,
