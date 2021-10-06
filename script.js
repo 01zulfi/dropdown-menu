@@ -92,7 +92,7 @@ function createList(menu, menuStyles, listStyles) {
   return listParent;
 }
 
-export default function renderDropdownMenu(
+renderDropdownMenu = function (
   targetId,
   button,
   menu,
@@ -110,4 +110,6 @@ export default function renderDropdownMenu(
   dropdownButton.addEventListener("click", () =>
     dropdownList.classList.toggle("active")
   );
-}
+};
+
+export {renderDropdownMenu};
