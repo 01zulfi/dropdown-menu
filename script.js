@@ -112,4 +112,4 @@ renderDropdownMenu = function (
   );
 };
 
-export {renderDropdownMenu};
+module.exports = renderDropdownMenu;
