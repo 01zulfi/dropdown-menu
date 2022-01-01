@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xari4808/dropdown-menu.git"
+    "url": "git+https://github.com/01zulfi/dropdown-menu.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xari4808/dropdown-menu/issues"
+    "url": "https://github.com/01zulfi/dropdown-menu/issues"
   },
-  "homepage": "https://github.com/xari4808/dropdown-menu#readme",
+  "homepage": "https://github.com/01zulfi/dropdown-menu#readme",
   "keywords": []
 }
